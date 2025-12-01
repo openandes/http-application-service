@@ -1,0 +1,35 @@
+# .github/workflows/publish.yml
+
+name: "Flakehub Publishing"
+on:
+  push:
+    tags:
+      # This regex ensures tags like v1.0.0 or 1.0.0 are matched
+      - "v?[0-9]+.[0-9]+.[0-9]+*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Publication of the current version"
+        type: "string"
+        required: true
+jobs:
+  flakehub-publish:
+    runs-on: "ubuntu-latest"
+    permissions:
+      # OIDC permission is required for the DeterminateSystems/flakehub-push action
+      id-token: "write"
+      contents: "read"
+    steps:
+      - uses: "actions/checkout@v5"
+        with:
+          persist-credentials: false
+          ref: "${{ (inputs.tag != null) && format('refs/tags/{0}', inputs.tag) || '' }}"
+      # 1. Sets up Nix environment and enables flakes
+      - uses: "DeterminateSystems/determinate-nix-action@v3" 
+      # 2. Publishes the flake using OIDC authentication
+      - uses: "DeterminateSystems/flakehub-push@main"
+        with:
+          visibility: "public"
+          name: "openandes/http-application-service"
+          tag: "${{ inputs.tag }}"
+          include-output-paths: true
