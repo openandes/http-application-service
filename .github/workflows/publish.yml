@@ -30,6 +30,6 @@ jobs:
       - uses: "DeterminateSystems/flakehub-push@main"
         with:
           visibility: "public"
-          name: "openandes/http-application-service"
+          name: "Open-Andes/http-application-service"
           tag: "${{ inputs.tag }}"
           include-output-paths: true
