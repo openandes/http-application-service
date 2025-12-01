@@ -30,7 +30,7 @@
           systemPkgs = pkgs.${system}; 
         in {
           default = systemPkgs.buildGoModule rec {
-            pname = "open-andes-http-application-service";
+            pname = "open-andes-http";
             version = "0.1.0";
             
             src = ./.;
