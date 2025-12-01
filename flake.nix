@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     # 2. The Go development workbench flake from FlakeHub
-    gnu-nix-go.url = "https://flakehub.com/f/Open-Andes/gnu-nix-go/0.1.0";
+    gnu-nix-go.url = "https://flakehub.com/f/Open-Andes/gnu-nix-go/0.1.1";
   };
 
   outputs = { self, nixpkgs, gnu-nix-go, ... }:
