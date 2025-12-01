@@ -1,5 +1,5 @@
 {
-  description = "A production-ready Go web server built with Nix on the Anduril Determined Nix environment.";
+  description = "Open Andes HTTP Application Service";
 
   inputs = {
     # 1. nixpkgs: The main collection of Nix packages
@@ -33,10 +33,10 @@
           pkgs = pkgs.${system};
         in {
           default = pkgs.buildGoModule rec {
-            pname = "my-web-server";
+            pname = "open-andes-http";
             version = "0.1.0";
             
-            src = self;
+            src = ./.;
             # NOTE: You must calculate and REPLACE this hash after the first `nix build` failure.
             vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
             
@@ -44,8 +44,8 @@
             # buildFlagsArray = [ "-ldflags=-s -w" ]; # Optimization flags
             
             meta = with pkgs.lib; {
-              description = "My production Go web server.";
-              license = licenses.mit;
+              description = "Open Andes HTTP Application Service";
+              license = licenses.agpl3;
             };
           };
         }
@@ -55,7 +55,7 @@
       apps = forAllSystems (system: {
         default = {
           type = "app";
-          program = "${self.packages.${system}.default}/bin/my-web-server";
+          program = "${self.packages.${system}.default}/bin/open-andes-http";
         };
       });
 
