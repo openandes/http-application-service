@@ -12,7 +12,7 @@
   outputs = { self, nixpkgs, gnu-nix-go, ... }:
     let
       # Define the systems we want to build for
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      supportedSystems = [ "x86_64-linux" ];
 
       # Helper function to generate outputs for all supported systems
       # This helper passes (system, pkgs) to the function 'f'
