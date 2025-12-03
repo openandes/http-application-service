@@ -33,3 +33,4 @@ jobs:
           name: "openandes/http-application-service"
           tag: "${{ inputs.tag }}"
           include-output-paths: true
+          systems: "x86_64-linux"
