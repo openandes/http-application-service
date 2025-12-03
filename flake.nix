@@ -23,11 +23,9 @@
     in {
 
       ## 1. The Package Output (The compiled executable)
-      # ✅ FIX 1: The function must accept pkgs as the second argument.
-      # ✅ FIX 3: The body must be a set { ... }
       packages = forAllSystems (system: pkgs: {
         default =
-          pkgs.buildGoModule rec { # ✅ FIX 2: Use 'pkgs' instead of the undefined 'systemPkgs'
+          pkgs.buildGoModule rec { 
             pname = "open-andes-http-application-service";
             version = "0.1.0";
 
@@ -36,7 +34,7 @@
             vendorHash = null;
 
             meta =
-              with pkgs.lib; { # ✅ FIX 2: Use 'pkgs.lib' instead of 'systemPkgs.lib'
+              with pkgs.lib; { 
                 description = "Open Andes HTTP Application Service";
                 license = licenses.agpl3;
               };
@@ -54,7 +52,6 @@
       });
 
       ## 3. The Development Shell (Re-uses the Go environment)
-      # ✅ FIX 1: The function must accept pkgs as the second argument.
       devShells = forAllSystems
         (system: pkgs: { default = gnu-nix-go.devShells.${system}.default; });
     };
